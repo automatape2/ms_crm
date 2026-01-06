@@ -53,6 +53,17 @@ return [
 
     /*
     |---------------------------------------------------------------------------
+    | Update Path
+    |---------------------------------------------------------------------------
+    |
+    | This value sets the path for Livewire's update endpoint.
+    |
+    */
+
+    'update_path' => env('LIVEWIRE_UPDATE_PATH', 'livewire/update'),
+
+    /*
+    |---------------------------------------------------------------------------
     | Layout
     |---------------------------------------------------------------------------
     | The view that will be used as the layout when rendering a single component
