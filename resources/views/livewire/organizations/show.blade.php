@@ -78,19 +78,21 @@
                                 </a>
                             </div>
                         @endif
-                        @if($organization->address)
+                        @if($organization->full_address)
                             <div>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('organizations.address') }}</p>
-                                <p class="text-gray-900 dark:text-white">{{ $organization->address }}</p>
+                                <p class="text-gray-900 dark:text-white">{{ $organization->full_address }}</p>
                             </div>
                         @endif
                         @if($organization->city || $organization->country)
                             <div>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('organizations.location') }}</p>
                                 <p class="text-gray-900 dark:text-white">
-                                    @if($organization->city){{ $organization->city }}@endif
-                                    @if($organization->city && $organization->country), @endif
-                                    @if($organization->country){{ $organization->country }}@endif
+                                    @if(is_array($organization->address))
+                                        @if(isset($organization->address['city'])){{ $organization->address['city'] }}@endif
+                                        @if(isset($organization->address['city']) && isset($organization->address['country'])), @endif
+                                        @if(isset($organization->address['country'])){{ $organization->address['country'] }}@endif
+                                    @endif
                                 </p>
                             </div>
                         @endif
