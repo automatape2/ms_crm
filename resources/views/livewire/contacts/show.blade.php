@@ -1,4 +1,4 @@
-<x-layouts.app :title="$contact->full_name">
+
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         {{-- Header with Actions --}}
         <div class="flex items-start justify-between">
@@ -284,4 +284,4 @@
             </div>
         </div>
     </div>
-</x-layouts.app>
+

@@ -1,4 +1,4 @@
-<x-layouts.app title="Nuevo Contacto">
+
     <div class="max-w-3xl mx-auto">
         {{-- Header --}}
         <div class="mb-6">
@@ -149,4 +149,4 @@
             </p>
         </div>
     </div>
-</x-layouts.app>
+

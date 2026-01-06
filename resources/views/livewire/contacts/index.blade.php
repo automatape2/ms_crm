@@ -1,4 +1,4 @@
-<x-layouts.app title="Contactos">
+
     <div class="flex h-full w-full flex-1 flex-col gap-6">
         {{-- Header --}}
         <div class="flex items-center justify-between">
@@ -221,4 +221,4 @@
             </div>
         </div>
     </div>
-</x-layouts.app>
+

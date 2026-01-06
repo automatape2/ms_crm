@@ -81,6 +81,6 @@ class Index extends Component
         return view('livewire.contacts.index', [
             'contacts' => $contacts,
             'organizations' => $organizations,
-        ]);
+        ])->layout('components.layouts.app', ['title' => 'Contactos']);
     }
 }

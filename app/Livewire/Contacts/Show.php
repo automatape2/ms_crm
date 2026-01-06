@@ -89,6 +89,7 @@ class Show extends Component
 
     public function render()
     {
-        return view('livewire.contacts.show');
+        return view('livewire.contacts.show')
+            ->layout('components.layouts.app', ['title' => $this->contact->full_name]);
     }
 }
