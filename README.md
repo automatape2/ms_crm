@@ -289,6 +289,10 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://automata.pe/ms_crm
 ASSET_URL=https://automata.pe/ms_crm
+
+# Configuración específica de Livewire
+LIVEWIRE_ASSET_URL=https://automata.pe/ms_crm
+LIVEWIRE_APP_URL=https://automata.pe/ms_crm
 ```
 
 **2. Limpia y cachea la configuración:**
@@ -303,6 +307,14 @@ php artisan view:cache
 **3. Da permisos a las carpetas:**
 ```bash
 chmod -R 775 storage bootstrap/cache
+```
+
+**Método alternativo - Editar index.php:**
+
+Si aún no funciona, edita `public/index.php` y agrega al inicio (después de `<?php`):
+```php
+// Force base path for subdirectory
+$_SERVER['SCRIPT_NAME'] = '/ms_crm/index.php';
 ```
 
 El sistema ahora usará correctamente las rutas con el subdirectorio `/ms_crm`.
