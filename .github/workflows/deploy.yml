@@ -37,24 +37,11 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Create deployment package
+      - name: Prepare Laravel for production
         run: |
-          mkdir -p deploy
-          rsync -av --exclude='node_modules' \
-                    --exclude='.git' \
-                    --exclude='.github' \
-                    --exclude='tests' \
-                    --exclude='storage/logs/*' \
-                    --exclude='storage/framework/cache/*' \
-                    --exclude='storage/framework/sessions/*' \
-                    --exclude='storage/framework/views/*' \
-                    --exclude='.env' \
-                    --exclude='.env.example' \
-                    --exclude='phpunit.xml' \
-                    --exclude='vite.config.js' \
-                    --exclude='package.json' \
-                    --exclude='package-lock.json' \
-                    ./ deploy/
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan view:clear
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -63,11 +50,21 @@ jobs:
           username: ms_crm@automata.pe
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
-          local-dir: ./deploy/
+          local-dir: ./
           server-dir: ./
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/tests/**
             **/.env
+            **/.env.example
+            **/phpunit.xml
+            **/vite.config.js
+            **/package.json
+            **/package-lock.json
+            **/storage/logs/**
+            **/storage/framework/cache/**
+            **/storage/framework/sessions/**
+            **/storage/framework/views/**
