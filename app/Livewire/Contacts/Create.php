@@ -65,6 +65,6 @@ class Create extends Component
 
         return view('livewire.contacts.create', [
             'organizations' => $organizations,
-        ])->layout('components.layouts.app', ['title' => 'Nuevo Contacto']);
+        ])->layout('components.layouts.app', ['title' => __('contacts.new_contact')]);
     }
 }
