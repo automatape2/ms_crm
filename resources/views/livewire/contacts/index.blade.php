@@ -3,11 +3,11 @@
         {{-- Header --}}
         <div class="flex items-center justify-between">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Contactos</h1>
-                <p class="text-gray-600 dark:text-gray-400 mt-1">Gestiona todos tus contactos</p>
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ __('contacts.title') }}</h1>
+                <p class="text-gray-600 dark:text-gray-400 mt-1">{{ __('contacts.subtitle') }}</p>
             </div>
             <flux:button href="{{ route('contacts.create') }}" icon="user-plus" variant="primary">
-                Nuevo Contacto
+                {{ __('contacts.new_contact') }}
             </flux:button>
         </div>
 
@@ -19,7 +19,7 @@
                     <flux:input
                         wire:model.live.debounce.300ms="search"
                         type="search"
-                        placeholder="Buscar contactos..."
+                        placeholder="{{ __('contacts.search_placeholder') }}"
                         icon="magnifying-glass"
                     />
                 </div>
@@ -27,17 +27,17 @@
                 {{-- Status Filter --}}
                 <div>
                     <flux:select wire:model.live="filterStatus">
-                        <option value="">Todos los estados</option>
-                        <option value="active">Activos</option>
-                        <option value="inactive">Inactivos</option>
-                        <option value="archived">Archivados</option>
+                        <option value="">{{ __('contacts.all_statuses') }}</option>
+                        <option value="active">{{ __('contacts.active') }}</option>
+                        <option value="inactive">{{ __('contacts.inactive') }}</option>
+                        <option value="archived">{{ __('contacts.archived') }}</option>
                     </flux:select>
                 </div>
 
                 {{-- Organization Filter --}}
                 <div>
                     <flux:select wire:model.live="filterOrganization">
-                        <option value="">Todas las organizaciones</option>
+                        <option value="">{{ __('contacts.all_organizations') }}</option>
                         @foreach($organizations as $org)
                             <option value="{{ $org->id }}">{{ $org->name }}</option>
                         @endforeach
@@ -48,18 +48,18 @@
             {{-- Active Filters Display --}}
             @if($search || $filterStatus || $filterOrganization || $filterSource)
                 <div class="flex items-center gap-2 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">Filtros activos:</span>
+                    <span class="text-sm text-gray-600 dark:text-gray-400">{{ __('contacts.active_filters') }}</span>
                     @if($search)
-                        <flux:badge color="blue">Búsqueda: "{{ $search }}"</flux:badge>
+                        <flux:badge color="blue">{{ __('contacts.search') }}: "{{ $search }}"</flux:badge>
                     @endif
                     @if($filterStatus)
-                        <flux:badge color="green">Estado: {{ ucfirst($filterStatus) }}</flux:badge>
+                        <flux:badge color="green">{{ __('contacts.status') }}: {{ ucfirst($filterStatus) }}</flux:badge>
                     @endif
                     @if($filterOrganization)
-                        <flux:badge color="purple">Organización filtrada</flux:badge>
+                        <flux:badge color="purple">{{ __('contacts.organization_filtered') }}</flux:badge>
                     @endif
                     <flux:button wire:click="resetFilters" size="sm" variant="ghost">
-                        Limpiar filtros
+                        {{ __('contacts.clear_filters') }}
                     </flux:button>
                 </div>
             @endif
@@ -80,7 +80,7 @@
                         <tr>
                             <th class="px-6 py-3 text-left">
                                 <button wire:click="sortBy('first_name')" class="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white">
-                                    Nombre
+                                    {{ __('contacts.name') }}
                                     @if($sortField === 'first_name')
                                         <flux:icon.chevron-{{ $sortDirection === 'asc' ? 'up' : 'down' }} class="size-4" />
                                     @endif
@@ -88,22 +88,22 @@
                             </th>
                             <th class="px-6 py-3 text-left">
                                 <span class="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                                    Email & Teléfono
+                                    {{ __('contacts.email_phone') }}
                                 </span>
                             </th>
                             <th class="px-6 py-3 text-left">
                                 <span class="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                                    Organización
+                                    {{ __('contacts.organization') }}
                                 </span>
                             </th>
                             <th class="px-6 py-3 text-left">
                                 <span class="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                                    Estado
+                                    {{ __('contacts.status_header') }}
                                 </span>
                             </th>
                             <th class="px-6 py-3 text-left">
                                 <button wire:click="sortBy('created_at')" class="flex items-center gap-1 text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hover:text-gray-900 dark:hover:text-white">
-                                    Creado
+                                    {{ __('contacts.created') }}
                                     @if($sortField === 'created_at')
                                         <flux:icon.chevron-{{ $sortDirection === 'asc' ? 'up' : 'down' }} class="size-4" />
                                     @endif
@@ -111,7 +111,7 @@
                             </th>
                             <th class="px-6 py-3 text-right">
                                 <span class="text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-                                    Acciones
+                                    {{ __('contacts.actions') }}
                                 </span>
                             </th>
                         </tr>
@@ -151,7 +151,7 @@
                                             <div class="text-gray-500 dark:text-gray-400">{{ $contact->organization->getTypeLabel() }}</div>
                                         </div>
                                     @else
-                                        <span class="text-sm text-gray-400 dark:text-gray-500">Sin organización</span>
+                                        <span class="text-sm text-gray-400 dark:text-gray-500">{{ __('contacts.no_organization') }}</span>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4">
@@ -169,11 +169,11 @@
                                 <td class="px-6 py-4 text-right text-sm font-medium">
                                     <div class="flex items-center justify-end gap-2">
                                         <flux:button href="{{ route('contacts.show', $contact->id) }}" size="sm" variant="ghost" icon="eye">
-                                            Ver
+                                            {{ __('contacts.view') }}
                                         </flux:button>
                                         <flux:button
                                             wire:click="deleteContact({{ $contact->id }})"
-                                            wire:confirm="¿Estás seguro de eliminar este contacto?"
+                                            wire:confirm="{{ __('contacts.delete_confirm') }}"
                                             size="sm"
                                             variant="ghost"
                                             icon="trash"
@@ -188,14 +188,14 @@
                                 <td colspan="6" class="px-6 py-12 text-center">
                                     <div class="flex flex-col items-center gap-2">
                                         <flux:icon.user-group class="size-12 text-gray-400" />
-                                        <p class="text-gray-500 dark:text-gray-400">No se encontraron contactos</p>
+                                        <p class="text-gray-500 dark:text-gray-400">{{ __('contacts.no_contacts_found') }}</p>
                                         @if($search || $filterStatus || $filterOrganization)
                                             <flux:button wire:click="resetFilters" size="sm">
-                                                Limpiar filtros
+                                                {{ __('contacts.clear_filters') }}
                                             </flux:button>
                                         @else
                                             <flux:button href="{{ route('contacts.create') }}" size="sm">
-                                                Crear primer contacto
+                                                {{ __('contacts.create_first_contact') }}
                                             </flux:button>
                                         @endif
                                     </div>
@@ -217,7 +217,7 @@
         {{-- Stats Footer --}}
         <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
             <div>
-                Mostrando {{ $contacts->firstItem() ?? 0 }} - {{ $contacts->lastItem() ?? 0 }} de {{ $contacts->total() }} contactos
+                {{ __('contacts.showing') }} {{ $contacts->firstItem() ?? 0 }} {{ __('contacts.to') }} {{ $contacts->lastItem() ?? 0 }} {{ __('contacts.of') }} {{ $contacts->total() }} {{ __('contacts.contacts') }}
             </div>
         </div>
     </div>
