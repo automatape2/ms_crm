@@ -16,7 +16,6 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('navigation.dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="users" :href="route('contacts.index')" :current="request()->routeIs('contacts.*')" wire:navigate>{{ __('navigation.contacts') }}</flux:navlist.item>
                     <flux:navlist.item icon="building-office-2" :href="route('organizations.index')" :current="request()->routeIs('organizations.*')" wire:navigate>{{ __('navigation.organizations') }}</flux:navlist.item>
-                    <flux:navlist.item icon="megaphone" :href="route('campaigns.index')" :current="request()->routeIs('campaigns.*')" wire:navigate>{{ __('navigation.campaigns') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

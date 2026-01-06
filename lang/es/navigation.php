@@ -6,7 +6,6 @@ return [
     'dashboard' => 'Dashboard',
     'contacts' => 'Contactos',
     'organizations' => 'Organizaciones',
-    'campaigns' => 'Campañas',
     
     // Footer
     'repository' => 'Repositorio',

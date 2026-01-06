@@ -22,12 +22,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/organizations/create', App\Livewire\Organizations\Create::class)->name('organizations.create');
     Route::get('/organizations/{id}', App\Livewire\Organizations\Show::class)->name('organizations.show');
     Route::get('/organizations/{id}/edit', App\Livewire\Organizations\Edit::class)->name('organizations.edit');
-    
-    // Campaigns
-    Route::get('/campaigns', App\Livewire\Campaigns\Index::class)->name('campaigns.index');
-    Route::get('/campaigns/create', App\Livewire\Campaigns\Create::class)->name('campaigns.create');
-    Route::get('/campaigns/{id}', App\Livewire\Campaigns\Show::class)->name('campaigns.show');
-    Route::get('/campaigns/{id}/edit', App\Livewire\Campaigns\Edit::class)->name('campaigns.edit');
 });
 
 Route::middleware(['auth'])->group(function () {

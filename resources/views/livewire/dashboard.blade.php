@@ -68,22 +68,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Active Campaigns --}}
-        <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('dashboard.active_campaigns') }}</p>
-                    <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['active_scheduled_campaigns'] ?? 0 }}</p>
-                    <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-                        {{ __('dashboard.active_scheduled_campaigns') }}
-                    </p>
-                </div>
-                <div class="bg-orange-100 dark:bg-orange-900/30 rounded-full p-3">
-                    <flux:icon.megaphone class="size-8 text-orange-600 dark:text-orange-400" />
-                </div>
-            </div>
-        </div>
     </div>
 
     {{-- Charts Row --}}
@@ -245,33 +229,4 @@
             </div>
         </div>
     </div>
-
-    {{-- Active Campaigns --}}
-    @if(count($activeCampaigns) > 0)
-        <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.active_campaigns_section') }}</h3>
-            <div class="grid gap-4 md:grid-cols-3">
-                @foreach($activeCampaigns as $campaign)
-                    <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="px-2 py-1 text-xs rounded-full font-medium
-                                {{ $campaign->status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : '' }}
-                                {{ $campaign->status === 'scheduled' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : '' }}
-                            ">
-                                {{ $campaign->status_label }}
-                            </span>
-                            <span class="text-xs text-gray-500">{{ $campaign->type_label }}</span>
-                        </div>
-                        <h4 class="font-medium text-gray-900 dark:text-white mb-1">{{ $campaign->name }}</h4>
-                        <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">{{ $campaign->description }}</p>
-                        @if($campaign->scheduled_at)
-                            <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                                📅 {{ $campaign->scheduled_at->format('d/m/Y') }}
-                            </p>
-                        @endif
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @endif
 </div>

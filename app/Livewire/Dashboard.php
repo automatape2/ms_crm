@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\Interaction;
-use App\Models\Campaign;
 use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
@@ -14,14 +13,12 @@ class Dashboard extends Component
     public $stats = [];
     public $recentInteractions = [];
     public $upcomingInteractions = [];
-    public $activeCampaigns = [];
 
     public function mount()
     {
         $this->loadStats();
         $this->loadRecentInteractions();
         $this->loadUpcomingInteractions();
-        $this->loadActiveCampaigns();
     }
 
     public function loadStats()
@@ -41,7 +38,6 @@ class Dashboard extends Component
                 ->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year)
                 ->count(),
-            'active_scheduled_campaigns' => Campaign::whereIn('status', ['active', 'scheduled'])->count(),
             'contacts_this_month' => Contact::whereMonth('created_at', now()->month)
                 ->whereYear('created_at', now()->year)
                 ->count(),
@@ -86,15 +82,6 @@ class Dashboard extends Component
             ->upcoming()
             ->orderBy('date', 'asc')
             ->limit(5)
-            ->get();
-    }
-
-    public function loadActiveCampaigns()
-    {
-        // Load both active and scheduled campaigns (matching the KPI count)
-        $this->activeCampaigns = Campaign::whereIn('status', ['active', 'scheduled'])
-            ->orderBy('scheduled_at', 'asc')
-            ->limit(3)
             ->get();
     }
 
