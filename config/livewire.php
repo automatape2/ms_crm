@@ -60,7 +60,7 @@ return [
     |
     */
 
-    'update_path' => env('LIVEWIRE_UPDATE_PATH', 'livewire/update'),
+    'update_path' => env('LIVEWIRE_UPDATE_PATH', 'ms_crm/livewire/update'),
 
     /*
     |---------------------------------------------------------------------------
