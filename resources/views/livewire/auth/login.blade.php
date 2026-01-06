@@ -5,6 +5,17 @@
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
 
+        <!-- Test Credentials -->
+        <div class="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+            <p class="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">
+                🔐 {{ __('Test Credentials') }}
+            </p>
+            <div class="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                <p><strong>{{ __('Email') }}:</strong> <code class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 rounded">test@example.com</code></p>
+                <p><strong>{{ __('Password') }}:</strong> <code class="px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 rounded">password</code></p>
+            </div>
+        </div>
+
         <form method="POST" action="{{ route('login.store') }}" class="flex flex-col gap-6">
             @csrf
 
