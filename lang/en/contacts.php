@@ -104,4 +104,17 @@ return [
     'tags_description' => 'Comma separated',
     'tip' => 'Tip',
     'create_help_text' => 'Fields marked with * are required. You can add custom tags to better classify your contacts.',
+    
+    // Contact Show Page
+    'back' => 'Back',
+    'new_interaction' => 'New Interaction',
+    'contact_information' => 'Contact Information',
+    'phone_label' => 'Phone',
+    'organization_label' => 'Organization',
+    'tags_label' => 'Tags',
+    'interactions_label' => 'Interactions',
+    'created_label' => 'Created',
+    'last_update_label' => 'Last Updated',
+    'interaction_timeline' => 'Interaction Timeline',
+    'created_by_label' => 'Created By',
 ];

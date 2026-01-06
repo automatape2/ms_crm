@@ -34,10 +34,10 @@
             </div>
             <div class="flex gap-2">
                 <flux:button href="{{ route('contacts.index') }}" variant="ghost" icon="arrow-left">
-                    Volver
+                    {{ __('contacts.back') }}
                 </flux:button>
                 <flux:button wire:click="toggleInteractionForm" variant="primary" icon="plus">
-                    Nueva Interacción
+                    {{ __('contacts.new_interaction') }}
                 </flux:button>
             </div>
         </div>
@@ -55,7 +55,7 @@
             <div class="space-y-6">
                 {{-- Contact Details Card --}}
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Información de Contacto</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.contact_information') }}</h3>
                     <div class="space-y-4">
                         <div>
                             <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Email</p>
@@ -66,7 +66,7 @@
                         </div>
                         @if($contact->phone)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Teléfono</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.phone_label') }}</p>
                                 <a href="tel:{{ $contact->phone }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center gap-2">
                                     <flux:icon.phone class="size-4" />
                                     {{ $contact->phone }}
@@ -99,18 +99,18 @@
 
                 {{-- Stats Card --}}
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Estadísticas</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.statistics') }}</h3>
                     <div class="space-y-3">
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Interacciones</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.interactions_label') }}</span>
                             <span class="font-semibold text-gray-900 dark:text-white">{{ $contact->interactions->count() }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Creado</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.created_label') }}</span>
                             <span class="text-gray-900 dark:text-white">{{ $contact->created_at->format('d/m/Y') }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Última actualización</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.last_update_label') }}</span>
                             <span class="text-gray-900 dark:text-white">{{ $contact->updated_at->diffForHumans() }}</span>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                 @if($showInteractionForm)
                     <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Nueva Interacción</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('contacts.new_interaction') }}</h3>
                             <flux:button wire:click="toggleInteractionForm" variant="ghost" size="sm" icon="x-mark">
                             </flux:button>
                         </div>
@@ -201,7 +201,7 @@
                 {{-- Interactions Timeline --}}
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-                        Timeline de Interacciones ({{ $contact->interactions->count() }})
+                        {{ __('contacts.interaction_timeline') }} ({{ $contact->interactions->count() }})
                     </h3>
 
                     @if($contact->interactions->count() > 0)

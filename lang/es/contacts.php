@@ -104,4 +104,17 @@ return [
     'tags_description' => 'Separadas por comas',
     'tip' => 'Consejo',
     'create_help_text' => 'Los campos marcados con * son obligatorios. Puedes agregar etiquetas personalizadas para clasificar mejor tus contactos.',
+    
+    // Contact Show Page
+    'back' => 'Volver',
+    'new_interaction' => 'Nueva Interacción',
+    'contact_information' => 'Información de Contacto',
+    'phone_label' => 'Teléfono',
+    'organization_label' => 'Organización',
+    'tags_label' => 'Etiquetas',
+    'interactions_label' => 'Interacciones',
+    'created_label' => 'Creado',
+    'last_update_label' => 'Última actualización',
+    'interaction_timeline' => 'Timeline de Interacciones',
+    'created_by_label' => 'Creado por',
 ];
