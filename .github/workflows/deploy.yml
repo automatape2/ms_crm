@@ -37,12 +37,6 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Prepare Laravel for production
-        run: |
-          php artisan config:clear
-          php artisan cache:clear
-          php artisan view:clear
-
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
