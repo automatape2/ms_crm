@@ -2,12 +2,12 @@
     {{-- Header --}}
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-            <p class="text-gray-600 dark:text-gray-400 mt-1">Resumen de tu CRM</p>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ __('dashboard.title') }}</h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">{{ __('dashboard.subtitle') }}</p>
         </div>
         <div class="flex gap-3">
             <flux:button href="{{ route('contacts.create') }}" icon="user-plus" variant="primary">
-                Nuevo Contacto
+                {{ __('dashboard.new_contact') }}
             </flux:button>
         </div>
     </div>
@@ -18,14 +18,14 @@
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Contactos</p>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('dashboard.total_contacts') }}</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_contacts'] ?? 0 }}</p>
                     <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-                        {{ $stats['active_contacts'] ?? 0 }} activos
+                        {{ $stats['active_contacts'] ?? 0 }} {{ __('dashboard.active_contacts') }}
                     </p>
                     @if(isset($stats['contact_growth']))
                         <p class="text-xs mt-1 {{ $stats['contact_growth'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
-                            {{ $stats['contact_growth'] > 0 ? '+' : '' }}{{ $stats['contact_growth'] }}% este mes
+                            {{ $stats['contact_growth'] > 0 ? '+' : '' }}{{ $stats['contact_growth'] }}% {{ __('dashboard.growth_this_month') }}
                         </p>
                     @endif
                 </div>
@@ -39,10 +39,10 @@
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Organizaciones</p>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('dashboard.organizations') }}</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_organizations'] ?? 0 }}</p>
                     <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-                        {{ $stats['active_organizations'] ?? 0 }} activas
+                        {{ $stats['active_organizations'] ?? 0 }} {{ __('dashboard.active_organizations') }}
                     </p>
                 </div>
                 <div class="bg-purple-100 dark:bg-purple-900/30 rounded-full p-3">
@@ -55,11 +55,11 @@
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Interacciones (mes)</p>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('dashboard.interactions_month') }}</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['interactions_this_month'] ?? 0 }}</p>
                     @if(isset($stats['positive_interactions']))
                         <p class="text-xs text-green-600 mt-2">
-                            {{ $stats['positive_interactions'] }} positivas
+                            {{ $stats['positive_interactions'] }} {{ __('dashboard.positive_interactions') }}
                         </p>
                     @endif
                 </div>
@@ -73,10 +73,10 @@
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Campañas Activas</p>
+                    <p class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('dashboard.active_campaigns') }}</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['active_scheduled_campaigns'] ?? 0 }}</p>
                     <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
-                        Activas y programadas
+                        {{ __('dashboard.active_scheduled_campaigns') }}
                     </p>
                 </div>
                 <div class="bg-orange-100 dark:bg-orange-900/30 rounded-full p-3">
@@ -90,7 +90,7 @@
     <div class="grid gap-4 md:grid-cols-2">
         {{-- Interactions by Type --}}
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Interacciones por Tipo</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.interactions_by_type') }}</h3>
             <div class="space-y-3">
                 @php
                     $typeIcons = [
@@ -102,12 +102,12 @@
                         'other' => '📌',
                     ];
                     $typeLabels = [
-                        'email' => 'Email',
-                        'call' => 'Llamadas',
-                        'meeting' => 'Reuniones',
-                        'event' => 'Eventos',
-                        'note' => 'Notas',
-                        'other' => 'Otros',
+                        'email' => __('dashboard.email'),
+                        'call' => __('dashboard.call'),
+                        'meeting' => __('dashboard.meeting'),
+                        'event' => __('dashboard.event'),
+                        'note' => __('dashboard.note'),
+                        'other' => __('dashboard.other'),
                     ];
                     $total = array_sum($stats['interactions_by_type'] ?? []);
                 @endphp
@@ -127,22 +127,22 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">No hay interacciones este mes</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ __('dashboard.no_interactions_this_month') }}</p>
                 @endforelse
             </div>
         </div>
 
         {{-- Organizations by Type --}}
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Organizaciones por Tipo</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.organizations_by_type') }}</h3>
             <div class="space-y-3">
                 @php
                     $orgLabels = [
-                        'gobierno' => 'Gobierno',
-                        'ong' => 'ONG',
-                        'empresa' => 'Empresa',
-                        'comunidad' => 'Comunidad',
-                        'otro' => 'Otro',
+                        'gobierno' => __('dashboard.gobierno'),
+                        'ong' => __('dashboard.ong'),
+                        'empresa' => __('dashboard.empresa'),
+                        'comunidad' => __('dashboard.comunidad'),
+                        'otro' => __('dashboard.otro'),
                     ];
                     $orgColors = [
                         'gobierno' => 'bg-blue-600',
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">No hay organizaciones registradas</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ __('dashboard.no_organizations') }}</p>
                 @endforelse
             </div>
         </div>
@@ -179,7 +179,7 @@
     <div class="grid gap-4 md:grid-cols-2">
         {{-- Recent Interactions --}}
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Interacciones Recientes</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.recent_interactions') }}</h3>
             <div class="space-y-4">
                 @forelse($recentInteractions as $interaction)
                     <div class="flex items-start gap-3 pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
@@ -209,17 +209,17 @@
                         @endif
                     </div>
                 @empty
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">No hay interacciones recientes</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ __('dashboard.no_recent_interactions') }}</p>
                 @endforelse
             </div>
             <a href="{{ route('contacts.index') }}" class="block mt-4 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400">
-                Ver todos los contactos →
+                {{ __('dashboard.view_all_contacts') }}
             </a>
         </div>
 
         {{-- Upcoming Interactions --}}
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Próximas Actividades</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.upcoming_activities') }}</h3>
             <div class="space-y-4">
                 @forelse($upcomingInteractions as $interaction)
                     <div class="flex items-start gap-3 pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
@@ -240,7 +240,7 @@
                         </div>
                     </div>
                 @empty
-                    <p class="text-gray-500 dark:text-gray-400 text-sm">No hay actividades programadas</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">{{ __('dashboard.no_upcoming_activities') }}</p>
                 @endforelse
             </div>
         </div>
@@ -249,7 +249,7 @@
     {{-- Active Campaigns --}}
     @if(count($activeCampaigns) > 0)
         <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Campañas Activas</h3>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('dashboard.active_campaigns_section') }}</h3>
             <div class="grid gap-4 md:grid-cols-3">
                 @foreach($activeCampaigns as $campaign)
                     <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
