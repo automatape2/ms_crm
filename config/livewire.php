@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'asset_url' => env('LIVEWIRE_ASSET_URL', null),
+    'asset_url' => env('LIVEWIRE_ASSET_URL', env('APP_URL') . '/livewire/livewire.js'),
 
     /*
     |---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return [
     |
     */
 
-    'app_url' => env('LIVEWIRE_APP_URL', null),
+    'app_url' => env('LIVEWIRE_APP_URL', env('APP_URL')),
 
     /*
     |---------------------------------------------------------------------------
