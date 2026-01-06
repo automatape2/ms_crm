@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ __('organizations.title') }}</h1>
                 <p class="text-gray-600 dark:text-gray-400 mt-1">{{ __('organizations.subtitle') }}</p>
             </div>
-            <flux:button href="#" icon="building-office" variant="primary">
+            <flux:button href="{{ route('organizations.create') }}" icon="building-office" variant="primary">
                 {{ __('organizations.new_organization') }}
             </flux:button>
         </div>
@@ -151,7 +151,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-right text-sm font-medium">
                                     <div class="flex items-center justify-end gap-2">
-                                        <flux:button href="#" size="sm" variant="ghost" icon="eye">
+                                        <flux:button href="{{ route('organizations.show', $organization->id) }}" size="sm" variant="ghost" icon="eye">
                                             {{ __('organizations.view') }}
                                         </flux:button>
                                     </div>

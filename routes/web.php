@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Organizations
     Route::get('/organizations', App\Livewire\Organizations\Index::class)->name('organizations.index');
+    Route::get('/organizations/create', App\Livewire\Organizations\Create::class)->name('organizations.create');
+    Route::get('/organizations/{id}', App\Livewire\Organizations\Show::class)->name('organizations.show');
 });
 
 Route::middleware(['auth'])->group(function () {
