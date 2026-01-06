@@ -6,6 +6,7 @@ return [
     'dashboard' => 'Dashboard',
     'contacts' => 'Contacts',
     'organizations' => 'Organizations',
+    'campaigns' => 'Campaigns',
     
     // Footer
     'repository' => 'Repository',
