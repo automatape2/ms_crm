@@ -288,11 +288,10 @@ Si instalas en un subdirectorio como `https://dominio.com/ms_crm`, sigue estos p
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://automata.pe/ms_crm
-ASSET_URL=https://automata.pe/ms_crm
 
-# Configuración específica de Livewire
-LIVEWIRE_ASSET_URL=https://automata.pe/ms_crm
-LIVEWIRE_APP_URL=https://automata.pe/ms_crm
+# Configuración de Livewire para subdirectorio
+LIVEWIRE_ASSET_URL=https://automata.pe/ms_crm/livewire/livewire.js
+LIVEWIRE_UPDATE_PATH=ms_crm/livewire/update
 ```
 
 **2. Limpia y cachea la configuración:**
