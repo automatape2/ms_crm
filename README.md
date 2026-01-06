@@ -279,6 +279,34 @@ MAIL_MAILER=smtp
 # ... configuración de email
 ```
 
+### Configuración para Subdirectorio (cPanel)
+
+Si instalas en un subdirectorio como `https://dominio.com/ms_crm`, sigue estos pasos:
+
+**1. Configura el `.env` en el servidor:**
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://automata.pe/ms_crm
+ASSET_URL=https://automata.pe/ms_crm
+```
+
+**2. Limpia y cachea la configuración:**
+```bash
+php artisan config:clear
+php artisan cache:clear
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+**3. Da permisos a las carpetas:**
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+El sistema ahora usará correctamente las rutas con el subdirectorio `/ms_crm`.
+
 ## 🚦 Roadmap
 
 Futuras mejoras planificadas:
