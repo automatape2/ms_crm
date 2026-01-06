@@ -5,12 +5,21 @@ use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', App\Livewire\Dashboard::class)->name('dashboard');
+    
+    // Contacts
+    Route::get('/contacts', App\Livewire\Contacts\Index::class)->name('contacts.index');
+    Route::get('/contacts/create', App\Livewire\Contacts\Create::class)->name('contacts.create');
+    Route::get('/contacts/{id}', App\Livewire\Contacts\Show::class)->name('contacts.show');
+    
+    // Organizations
+    Route::get('/organizations', App\Livewire\Organizations\Index::class)->name('organizations.index');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
