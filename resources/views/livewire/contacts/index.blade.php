@@ -62,7 +62,7 @@
                         Limpiar filtros
                     </flux:button>
                 </div>
-            @endif>
+            @endif
         </div>
 
         {{-- Flash Message --}}
