@@ -12,15 +12,15 @@
         <div class="grid gap-6 md:grid-cols-2">
             {{-- Basic Information --}}
             <div class="md:col-span-2">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Información Básica</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('organizations.basic_information') }}</h3>
             </div>
 
             {{-- Name --}}
             <div class="md:col-span-2">
                 <flux:input
                     wire:model="name"
-                    label="Nombre *"
-                    placeholder="Nombre de la organización"
+                    label="{{ __('organizations.name_label') }}"
+                    placeholder="{{ __('organizations.name_placeholder') }}"
                     required
                 />
                 @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
@@ -28,8 +28,8 @@
 
             {{-- Type --}}
             <div>
-                <flux:select wire:model="type" label="Tipo *" required>
-                    <option value="">Seleccionar tipo</option>
+                <flux:select wire:model="type" label="{{ __('organizations.type_label') }}" required>
+                    <option value="">{{ __('organizations.type_select') }}</option>
                     <option value="gobierno">{{ __('dashboard.gobierno') }}</option>
                     <option value="ong">{{ __('dashboard.ong') }}</option>
                     <option value="empresa">{{ __('dashboard.empresa') }}</option>
@@ -43,15 +43,15 @@
             <div>
                 <flux:input
                     wire:model="industry"
-                    label="Industria"
-                    placeholder="Ej: Tecnología, Salud, Educación"
+                    label="{{ __('organizations.industry_label') }}"
+                    placeholder="{{ __('organizations.industry_placeholder') }}"
                 />
                 @error('industry') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
             {{-- Contact Information --}}
             <div class="md:col-span-2 mt-4">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Información de Contacto</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('organizations.contact_information') }}</h3>
             </div>
 
             {{-- Email --}}
@@ -59,8 +59,8 @@
                 <flux:input
                     wire:model="email"
                     type="email"
-                    label="Email"
-                    placeholder="contacto@organizacion.com"
+                    label="{{ __('organizations.email_label') }}"
+                    placeholder="{{ __('organizations.email_placeholder') }}"
                 />
                 @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
@@ -69,8 +69,8 @@
             <div>
                 <flux:input
                     wire:model="phone"
-                    label="Teléfono"
-                    placeholder="+1 234 567 8900"
+                    label="{{ __('organizations.phone_label') }}"
+                    placeholder="{{ __('organizations.phone_placeholder') }}"
                 />
                 @error('phone') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
@@ -80,23 +80,23 @@
                 <flux:input
                     wire:model="website"
                     type="url"
-                    label="Sitio Web"
-                    placeholder="https://ejemplo.com"
+                    label="{{ __('organizations.website_label') }}"
+                    placeholder="{{ __('organizations.website_placeholder') }}"
                 />
                 @error('website') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
             {{-- Address --}}
             <div class="md:col-span-2 mt-4">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Dirección</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('organizations.address_section') }}</h3>
             </div>
 
             {{-- Street --}}
             <div class="md:col-span-2">
                 <flux:input
                     wire:model="street"
-                    label="Calle"
-                    placeholder="Calle Principal 123"
+                    label="{{ __('organizations.street_label') }}"
+                    placeholder="{{ __('organizations.street_placeholder') }}"
                 />
                 @error('street') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
@@ -105,8 +105,8 @@
             <div>
                 <flux:input
                     wire:model="city"
-                    label="Ciudad"
-                    placeholder="Ciudad"
+                    label="{{ __('organizations.city_label') }}"
+                    placeholder="{{ __('organizations.city_placeholder') }}"
                 />
                 @error('city') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
@@ -115,8 +115,8 @@
             <div>
                 <flux:input
                     wire:model="state"
-                    label="Estado/Provincia"
-                    placeholder="Estado"
+                    label="{{ __('organizations.state_label') }}"
+                    placeholder="{{ __('organizations.state_placeholder') }}"
                 />
                 @error('state') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
@@ -125,15 +125,15 @@
             <div>
                 <flux:input
                     wire:model="country"
-                    label="País"
-                    placeholder="País"
+                    label="{{ __('organizations.country_label') }}"
+                    placeholder="{{ __('organizations.country_placeholder') }}"
                 />
                 @error('country') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
             </div>
 
             {{-- Status --}}
             <div>
-                <flux:select wire:model="status" label="Estado *" required>
+                <flux:select wire:model="status" label="{{ __('organizations.status_label') }}" required>
                     <option value="active">{{ __('organizations.active') }}</option>
                     <option value="inactive">{{ __('organizations.inactive') }}</option>
                 </flux:select>
@@ -144,10 +144,10 @@
         {{-- Actions --}}
         <div class="flex items-center justify-end gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
             <flux:button href="{{ route('organizations.index') }}" variant="ghost">
-                Cancelar
+                {{ __('organizations.cancel') }}
             </flux:button>
             <flux:button type="submit" variant="primary">
-                Guardar Organización
+                {{ __('organizations.save') }}
             </flux:button>
         </div>
     </form>

@@ -130,34 +130,34 @@
                         <form wire:submit="saveInteraction">
                             <div class="grid gap-4">
                                 <div class="grid gap-4 md:grid-cols-2">
-                                    <flux:select wire:model="interactionType" label="Tipo *" required>
-                                        <option value="email">📧 Email</option>
-                                        <option value="call">📞 Llamada</option>
-                                        <option value="meeting">🤝 Reunión</option>
-                                        <option value="event">📅 Evento</option>
-                                        <option value="note">📝 Nota</option>
-                                        <option value="other">📌 Otro</option>
+                                    <flux:select wire:model="interactionType" label="{{ __('contacts.interaction_type') }}" required>
+                                        <option value="email">📧 {{ __('contacts.interaction_email') }}</option>
+                                        <option value="call">📞 {{ __('contacts.interaction_call') }}</option>
+                                        <option value="meeting">🤝 {{ __('contacts.interaction_meeting') }}</option>
+                                        <option value="event">📅 {{ __('contacts.interaction_event') }}</option>
+                                        <option value="note">📝 {{ __('contacts.interaction_note') }}</option>
+                                        <option value="other">📌 {{ __('contacts.interaction_other') }}</option>
                                     </flux:select>
 
                                     <flux:input
                                         wire:model="interactionDate"
                                         type="datetime-local"
-                                        label="Fecha y Hora *"
+                                        label="{{ __('contacts.interaction_date') }}"
                                         required
                                     />
                                 </div>
 
                                 <flux:input
                                     wire:model="interactionSubject"
-                                    label="Asunto *"
-                                    placeholder="Ej: Reunión de seguimiento"
+                                    label="{{ __('contacts.interaction_subject') }}"
+                                    placeholder="{{ __('contacts.interaction_subject_placeholder') }}"
                                     required
                                 />
 
                                 <flux:textarea
                                     wire:model="interactionDescription"
-                                    label="Descripción"
-                                    placeholder="Detalles de la interacción..."
+                                    label="{{ __('contacts.interaction_description') }}"
+                                    placeholder="{{ __('contacts.interaction_description_placeholder') }}"
                                     rows="3"
                                 />
 
@@ -165,32 +165,32 @@
                                     <flux:input
                                         wire:model="interactionDuration"
                                         type="number"
-                                        label="Duración (minutos)"
+                                        label="{{ __('contacts.interaction_duration') }}"
                                         placeholder="60"
                                         min="0"
                                     />
 
-                                    <flux:select wire:model="interactionOutcome" label="Resultado">
-                                        <option value="">Sin especificar</option>
-                                        <option value="positive">✅ Positivo</option>
-                                        <option value="neutral">➖ Neutral</option>
-                                        <option value="negative">❌ Negativo</option>
+                                    <flux:select wire:model="interactionOutcome" label="{{ __('contacts.interaction_outcome') }}">
+                                        <option value="">{{ __('contacts.interaction_outcome_none') }}</option>
+                                        <option value="positive">✅ {{ __('contacts.interaction_outcome_positive') }}</option>
+                                        <option value="neutral">➖ {{ __('contacts.interaction_outcome_neutral') }}</option>
+                                        <option value="negative">❌ {{ __('contacts.interaction_outcome_negative') }}</option>
                                     </flux:select>
                                 </div>
 
                                 <flux:textarea
                                     wire:model="interactionNextSteps"
-                                    label="Próximos Pasos"
-                                    placeholder="Acciones a realizar..."
+                                    label="{{ __('contacts.interaction_next_steps') }}"
+                                    placeholder="{{ __('contacts.interaction_next_steps_placeholder') }}"
                                     rows="2"
                                 />
 
                                 <div class="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                                     <flux:button wire:click="toggleInteractionForm" type="button" variant="ghost">
-                                        Cancelar
+                                        {{ __('contacts.interaction_cancel') }}
                                     </flux:button>
                                     <flux:button type="submit" variant="primary">
-                                        Guardar Interacción
+                                        {{ __('contacts.interaction_save') }}
                                     </flux:button>
                                 </div>
                             </div>
@@ -239,7 +239,7 @@
                                                 @endif
                                                 <flux:button
                                                     wire:click="deleteInteraction({{ $interaction->id }})"
-                                                    wire:confirm="¿Eliminar esta interacción?"
+                                                    wire:confirm="{{ __('contacts.interaction_delete_confirm') }}"
                                                     size="sm"
                                                     variant="ghost"
                                                     icon="trash"
@@ -257,14 +257,14 @@
 
                                         @if($interaction->next_steps)
                                             <div class="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded">
-                                                <p class="text-xs font-medium text-blue-700 dark:text-blue-400 mb-1">Próximos Pasos:</p>
+                                                <p class="text-xs font-medium text-blue-700 dark:text-blue-400 mb-1">{{ __('contacts.interaction_next_steps_label') }}</p>
                                                 <p class="text-sm text-blue-900 dark:text-blue-300 whitespace-pre-line">{{ $interaction->next_steps }}</p>
                                             </div>
                                         @endif
 
                                         @if($interaction->creator)
                                             <div class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
-                                                Creado por {{ $interaction->creator->name }} · {{ $interaction->created_at->diffForHumans() }}
+                                                {{ __('contacts.interaction_created_by') }} {{ $interaction->creator->name }} · {{ $interaction->created_at->diffForHumans() }}
                                             </div>
                                         @endif
                                     </div>
@@ -274,9 +274,9 @@
                     @else
                         <div class="text-center py-12">
                             <flux:icon.chat-bubble-left-right class="size-12 text-gray-400 mx-auto mb-3" />
-                            <p class="text-gray-500 dark:text-gray-400 mb-4">No hay interacciones registradas</p>
+                            <p class="text-gray-500 dark:text-gray-400 mb-4">{{ __('contacts.no_interactions') }}</p>
                             <flux:button wire:click="toggleInteractionForm" variant="primary" size="sm">
-                                Registrar primera interacción
+                                {{ __('contacts.record_first_interaction') }}
                             </flux:button>
                         </div>
                     @endif
