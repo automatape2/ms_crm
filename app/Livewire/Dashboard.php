@@ -27,8 +27,13 @@ class Dashboard extends Component
     public function loadStats()
     {
         $this->stats = [
-            'total_contacts' => Contact::active()->count(),
-            'total_organizations' => Organization::active()->count(),
+            // Totales generales
+            'total_contacts' => Contact::count(),
+            'active_contacts' => Contact::active()->count(),
+            'total_organizations' => Organization::count(),
+            'active_organizations' => Organization::active()->count(),
+            
+            // Estadísticas del mes actual
             'interactions_this_month' => Interaction::whereMonth('date', now()->month)
                 ->whereYear('date', now()->year)
                 ->count(),
@@ -36,7 +41,7 @@ class Dashboard extends Component
                 ->whereMonth('date', now()->month)
                 ->whereYear('date', now()->year)
                 ->count(),
-            'active_campaigns' => Campaign::active()->count(),
+            'active_scheduled_campaigns' => Campaign::whereIn('status', ['active', 'scheduled'])->count(),
             'contacts_this_month' => Contact::whereMonth('created_at', now()->month)
                 ->whereYear('created_at', now()->year)
                 ->count(),
@@ -60,8 +65,7 @@ class Dashboard extends Component
             ->toArray();
 
         // Organizations by type (for chart)
-        $this->stats['organizations_by_type'] = Organization::active()
-            ->select('type', DB::raw('count(*) as total'))
+        $this->stats['organizations_by_type'] = Organization::select('type', DB::raw('count(*) as total'))
             ->groupBy('type')
             ->pluck('total', 'type')
             ->toArray();
@@ -87,6 +91,7 @@ class Dashboard extends Component
 
     public function loadActiveCampaigns()
     {
+        // Load both active and scheduled campaigns (matching the KPI count)
         $this->activeCampaigns = Campaign::whereIn('status', ['active', 'scheduled'])
             ->orderBy('scheduled_at', 'asc')
             ->limit(3)

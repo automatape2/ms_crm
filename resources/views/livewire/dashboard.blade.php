@@ -20,8 +20,11 @@
                 <div>
                     <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Contactos</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_contacts'] ?? 0 }}</p>
+                    <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                        {{ $stats['active_contacts'] ?? 0 }} activos
+                    </p>
                     @if(isset($stats['contact_growth']))
-                        <p class="text-xs mt-2 {{ $stats['contact_growth'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                        <p class="text-xs mt-1 {{ $stats['contact_growth'] >= 0 ? 'text-green-600' : 'text-red-600' }}">
                             {{ $stats['contact_growth'] > 0 ? '+' : '' }}{{ $stats['contact_growth'] }}% este mes
                         </p>
                     @endif
@@ -38,6 +41,9 @@
                 <div>
                     <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Organizaciones</p>
                     <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['total_organizations'] ?? 0 }}</p>
+                    <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                        {{ $stats['active_organizations'] ?? 0 }} activas
+                    </p>
                 </div>
                 <div class="bg-purple-100 dark:bg-purple-900/30 rounded-full p-3">
                     <flux:icon.building-office class="size-8 text-purple-600 dark:text-purple-400" />
@@ -68,7 +74,10 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Campañas Activas</p>
-                    <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['active_campaigns'] ?? 0 }}</p>
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2">{{ $stats['active_scheduled_campaigns'] ?? 0 }}</p>
+                    <p class="text-xs mt-1 text-gray-500 dark:text-gray-400">
+                        Activas y programadas
+                    </p>
                 </div>
                 <div class="bg-orange-100 dark:bg-orange-900/30 rounded-full p-3">
                     <flux:icon.megaphone class="size-8 text-orange-600 dark:text-orange-400" />
