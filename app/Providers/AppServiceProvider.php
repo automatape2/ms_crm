@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
-use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,13 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Configure Livewire for subdirectory deployment
-        Livewire::setUpdateRoute(function ($handle) {
-            return Route::post('livewire/update', $handle);
-        });
-        
-        Livewire::setScriptRoute(function ($handle) {
-            return Route::get('livewire/livewire.js', $handle);
-        });
+        // Force root URL for subdirectory installations
+        if (str_contains(config('app.url'), '/ms_crm')) {
+            URL::forceRootUrl(config('app.url'));
+        }
     }
 }

@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteBase /ms_crm/
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
