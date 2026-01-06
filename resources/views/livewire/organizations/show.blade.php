@@ -155,8 +155,8 @@
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             {{ __('organizations.contacts') }} ({{ $organization->contacts->count() }})
                         </h3>
-                        <flux:button href="{{ route('contacts.create', ['organization_id' => $organization->id]) }}" size="sm" variant="primary" icon="plus">
-                            {{ __('organizations.add_contact') }}
+                        <flux:button href="{{ route('contacts.create') }}?organization_id={{ $organization->id }}" size="sm" variant="primary" icon="plus">
+                            Añadir Contacto
                         </flux:button>
                     </div>
 
