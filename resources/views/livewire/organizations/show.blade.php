@@ -28,10 +28,10 @@
             </div>
             <div class="flex gap-2">
                 <flux:button href="{{ route('organizations.index') }}" variant="ghost" icon="arrow-left">
-                    Volver
+                    {{ __('contacts.back') }}
                 </flux:button>
                 <flux:button href="{{ route('organizations.edit', $organization) }}" variant="primary" icon="pencil">
-                    Editar
+                    {{ __('contacts.edit') }}
                 </flux:button>
             </div>
         </div>
@@ -49,11 +49,11 @@
             <div class="space-y-6">
                 {{-- Organization Details Card --}}
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Detalles</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.contact_details') }}</h3>
                     <div class="space-y-4">
                         @if($organization->email)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Email</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.email') }}</p>
                                 <a href="mailto:{{ $organization->email }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center gap-2">
                                     <flux:icon.envelope class="size-4" />
                                     {{ $organization->email }}
@@ -62,7 +62,7 @@
                         @endif
                         @if($organization->phone)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Teléfono</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.phone') }}</p>
                                 <a href="tel:{{ $organization->phone }}" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center gap-2">
                                     <flux:icon.phone class="size-4" />
                                     {{ $organization->phone }}
@@ -71,7 +71,7 @@
                         @endif
                         @if($organization->website)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Sitio Web</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.website') }}</p>
                                 <a href="{{ $organization->website }}" target="_blank" class="text-blue-600 hover:text-blue-700 dark:text-blue-400 flex items-center gap-2">
                                     <flux:icon.globe-alt class="size-4" />
                                     {{ $organization->website }}
@@ -80,13 +80,13 @@
                         @endif
                         @if($organization->full_address)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Dirección</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.address') }}</p>
                                 <p class="text-gray-900 dark:text-white">{{ $organization->full_address }}</p>
                             </div>
                         @endif
                         @if($organization->city || $organization->country)
                             <div>
-                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">Ubicación</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 uppercase mb-1">{{ __('contacts.location') }}</p>
                                 <p class="text-gray-900 dark:text-white">
                                     @if(is_array($organization->address))
                                         @if(isset($organization->address['city'])){{ $organization->address['city'] }}@endif
@@ -102,7 +102,7 @@
                 {{-- Tags Card --}}
                 @if($organization->tags && count($organization->tags) > 0)
                     <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Etiquetas</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.tags') }}</h3>
                         <div class="flex flex-wrap gap-2">
                             @foreach($organization->tags as $tag)
                                 <span class="px-3 py-1 text-sm bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 rounded-full">
@@ -115,23 +115,23 @@
 
                 {{-- Stats Card --}}
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Estadísticas</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.statistics') }}</h3>
                     <div class="space-y-3">
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Contactos</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.contacts') }}</span>
                             <span class="font-semibold text-gray-900 dark:text-white">{{ $organization->contacts->count() }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Creado</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.created') }}</span>
                             <span class="text-gray-900 dark:text-white">{{ $organization->created_at->format('d/m/Y') }}</span>
                         </div>
                         <div class="flex justify-between">
-                            <span class="text-gray-600 dark:text-gray-400">Última actualización</span>
+                            <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.last_updated') }}</span>
                             <span class="text-gray-900 dark:text-white">{{ $organization->updated_at->diffForHumans() }}</span>
                         </div>
                         @if($organization->creator)
                             <div class="flex justify-between">
-                                <span class="text-gray-600 dark:text-gray-400">Creado por</span>
+                                <span class="text-gray-600 dark:text-gray-400">{{ __('contacts.created_by') }}</span>
                                 <span class="text-gray-900 dark:text-white">{{ $organization->creator->name }}</span>
                             </div>
                         @endif
@@ -144,7 +144,7 @@
                 {{-- Notes Section --}}
                 @if($organization->notes)
                     <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Notas</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.notes') }}</h3>
                         <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line">{{ $organization->notes }}</p>
                     </div>
                 @endif
@@ -153,10 +153,10 @@
                 <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                            Contactos ({{ $organization->contacts->count() }})
+                            {{ __('contacts.contacts') }} ({{ $organization->contacts->count() }})
                         </h3>
                         <flux:button href="{{ route('contacts.create') }}?organization_id={{ $organization->id }}" size="sm" variant="primary" icon="plus">
-                            Añadir Contacto
+                            {{ __('contacts.add_contact') }}
                         </flux:button>
                     </div>
 
@@ -190,8 +190,8 @@
                     @else
                         <div class="text-center py-12">
                             <flux:icon.users class="mx-auto size-12 text-gray-400" />
-                            <p class="mt-2 text-gray-600 dark:text-gray-400">No hay contactos</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">Añade contactos a esta organización</p>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">{{ __('contacts.no_contacts') }}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">{{ __('contacts.add_contacts_help') }}</p>
                         </div>
                     @endif
                 </div>
@@ -199,7 +199,7 @@
                 {{-- Description Section --}}
                 @if($organization->description)
                     <div class="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Descripción</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ __('contacts.description') }}</h3>
                         <p class="text-gray-700 dark:text-gray-300 whitespace-pre-line">{{ $organization->description }}</p>
                     </div>
                 @endif

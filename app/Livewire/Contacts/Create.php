@@ -18,6 +18,11 @@ class Create extends Component
     public $status = 'active';
     public $source = 'manual';
 
+    public function mount()
+    {
+        $this->organization_id = request()->query('organization_id', '');
+    }
+
     protected $rules = [
         'first_name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
