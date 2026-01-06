@@ -1,6 +1,6 @@
-# 🚀 CRM - Sistema de Gestión de Relaciones
+# 🚀 MS CRM - Sistema de Gestión de Relaciones
 
-Sistema CRM modular y escalable para la gestión de comunidades, stakeholders y relacionamiento institucional.
+Sistema CRM modular y escalable para la gestión de contactos, organizaciones e interacciones empresariales.
 
 ## 📋 Características
 
@@ -9,18 +9,18 @@ Sistema CRM modular y escalable para la gestión de comunidades, stakeholders y 
 - ✅ **Gestión de Organizaciones** (gobiernos, ONGs, empresas, comunidades)
 - ✅ **Timeline de Interacciones** (emails, llamadas, reuniones, eventos, notas)
 - ✅ **Segmentación de Audiencias** dinámica y estática
-- ✅ **Campañas** (email, eventos, encuestas)
 - ✅ **Auditoría Completa** de todas las acciones
 - ✅ **Búsqueda y Filtros** avanzados
+- ✅ **Sistema Multiidioma** (Español/Inglés)
 - ✅ **Dark Mode** completo
 - ✅ **Responsive Design** (móvil, tablet, desktop)
 
 ## 🛠️ Stack Tecnológico
 
-- **Backend:** Laravel 12 + PHP 8.2
+- **Backend:** Laravel 11 + PHP 8.2
 - **Frontend:** Livewire 3 + Flux UI
-- **Base de Datos:** SQLite (dev) / MySQL (prod)
-- **Autenticación:** Laravel Fortify
+- **Base de Datos:** MySQL
+- **Autenticación:** Laravel Fortify (con 2FA)
 - **Testing:** Pest PHP
 - **Build:** Vite
 
@@ -30,6 +30,7 @@ Sistema CRM modular y escalable para la gestión de comunidades, stakeholders y 
 - PHP 8.2+
 - Composer
 - Node.js & NPM
+- MySQL 8.0+
 
 ### Pasos de Instalación
 
@@ -48,233 +49,272 @@ npm install
 3. **Configurar el entorno**
 ```bash
 cp .env.example .env
-php artisan key:generate
 ```
 
-4. **Ejecutar migraciones y seeders**
+Editar `.env` con tus credenciales de MySQL:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ms_crm
+DB_USERNAME=root
+DB_PASSWORD=tu_password
+```
+
+4. **Generar key y migrar base de datos**
 ```bash
-php artisan migrate --seed
-# O específicamente el seeder del CRM:
-php artisan db:seed --class=CRMSeeder
+php artisan key:generate
+php artisan migrate:fresh --seed
 ```
 
 5. **Compilar assets**
 ```bash
 npm run build
-# O en modo desarrollo:
+# o para desarrollo:
 npm run dev
 ```
 
-6. **Iniciar el servidor**
+6. **Iniciar servidor**
 ```bash
-# Opción 1: Servidor completo con queue, logs y vite
-composer run dev
-
-# Opción 2: Solo servidor
 php artisan serve
 ```
 
-7. **Acceder al sistema**
-- URL: http://localhost:8000
-- Email: `admin@crm.test`
+Acceder a: `http://localhost:8000`
+
+**Credenciales por defecto:**
+- Email: `test@example.com`
 - Password: `password`
 
 ## 📊 Datos de Prueba
 
-El sistema incluye un seeder completo con datos de prueba:
+El seeder incluye datos realistas:
+- **1 Usuario** de prueba
+- **5 Organizaciones** de diferentes tipos (gobierno, ONG, empresa, comunidad)
+- **8 Contactos** vinculados a organizaciones con diferentes roles
+- **10 Interacciones** (6 pasadas y 4 próximas) con variedad de tipos y resultados
 
-- **1 Usuario Admin** (admin@crm.test / password)
-- **4 Organizaciones** (Gobierno, ONG, Empresa, Comunidad)
-- **6 Contactos** con diferentes roles
-- **6 Interacciones** variadas
-- **3 Segmentos** de audiencia
-- **3 Campañas** en diferentes estados
-
-Para cargar los datos:
+Para regenerar los datos:
 ```bash
-php artisan db:seed --class=CRMSeeder
+php artisan migrate:fresh --seed
 ```
 
-## 🔑 Credenciales por Defecto
-
-**Usuario Administrador:**
-- Email: `admin@crm.test`
-- Password: `password`
-
-⚠️ **IMPORTANTE:** Cambiar estas credenciales en producción.
-
-## 📁 Estructura del Proyecto
+## 🏗️ Estructura del Proyecto
 
 ```
 app/
-├── Livewire/               # Componentes Livewire
-│   ├── Dashboard.php
-│   └── Contacts/
-│       ├── Index.php
-│       ├── Create.php
-│       └── Show.php
-└── Models/                 # Modelos Eloquent
-    ├── Organization.php
-    ├── Contact.php
-    ├── Interaction.php
-    ├── Segment.php
-    ├── Campaign.php
-    └── Activity.php
-
+├── Livewire/
+│   ├── Dashboard.php           # Dashboard principal con KPIs
+│   ├── Contacts/               # CRUD de contactos
+│   │   ├── Index.php
+│   │   ├── Create.php
+│   │   ├── Show.php
+│   │   └── Edit.php
+│   ├── Organizations/          # CRUD de organizaciones
+│   │   ├── Index.php
+│   │   ├── Create.php
+│   │   ├── Show.php
+│   │   └── Edit.php
+│   └── Actions/                # Acciones rápidas
+├── Models/
+│   ├── User.php
+│   ├── Contact.php
+│   ├── Organization.php
+│   ├── Interaction.php
+│   ├── Segment.php
+│   ├── Campaign.php
+│   └── Activity.php
+resources/
+├── views/
+│   ├── components/
+│   │   ├── app-logo.blade.php
+│   │   └── layouts/
+│   └── livewire/
+│       ├── dashboard.blade.php
+│       ├── contacts/
+│       └── organizations/
+├── js/
+│   └── app.js
+└── css/
+    └── app.css
+routes/
+└── web.php                     # Rutas principales
 database/
-├── migrations/             # Migraciones de BD
+├── migrations/                 # Esquema de base de datos
 └── seeders/
-    └── CRMSeeder.php
-
-resources/views/livewire/   # Vistas Livewire
-├── dashboard.blade.php
-└── contacts/
-    ├── index.blade.php
-    ├── create.blade.php
-    └── show.blade.php
+    └── DatabaseSeeder.php      # Datos de prueba
 ```
 
-## 🎯 Rutas Principales
+## 🌐 Internacionalización
 
-### Dashboard
-- `GET /dashboard` - Dashboard principal con KPIs
+El sistema soporta múltiples idiomas. Los archivos de traducción están en:
 
-### Contacts
-- `GET /contacts` - Lista de contactos
-- `GET /contacts/create` - Crear nuevo contacto
-- `GET /contacts/{id}` - Perfil de contacto con interacciones
+```
+lang/
+├── en/                         # Inglés
+│   ├── contacts.php
+│   ├── organizations.php
+│   ├── interactions.php
+│   └── navigation.php
+└── es/                         # Español
+    ├── contacts.php
+    ├── organizations.php
+    ├── interactions.php
+    └── navigation.php
+```
 
-### Organizations
-- `GET /organizations` - Lista de organizaciones
-
-## 📖 Documentación
-
-Para más información detallada:
-
-- **[CRM_ARCHITECTURE.md](CRM_ARCHITECTURE.md)** - Arquitectura completa del sistema
-- **[CRM_EXECUTIVE_SUMMARY.md](CRM_EXECUTIVE_SUMMARY.md)** - Resumen ejecutivo
-- **[CRM_STATUS.md](CRM_STATUS.md)** - Estado actual del proyecto
+Para cambiar el idioma por defecto, editar `config/app.php`:
+```php
+'locale' => 'es', // o 'en'
+```
 
 ## 🧪 Testing
 
-Ejecutar tests:
+Ejecutar pruebas con Pest:
 ```bash
 php artisan test
-# O con Pest:
+# o directamente con Pest
 ./vendor/bin/pest
 ```
 
-## 🚢 Deployment
+## 📝 Modelos Principales
 
-### Preparar para Producción
+### Contact
+Gestión de contactos individuales con:
+- Información básica (nombre, email, teléfono, posición)
+- Relación con organizaciones
+- Seguimiento de interacciones
+- Segmentación por tags y campos personalizados
+- Estados: active, inactive
+- Fuentes: manual, import, form, api
 
-1. **Configurar variables de entorno**
-```bash
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://tu-dominio.com
-```
+### Organization
+Gestión de organizaciones con:
+- **Tipos**: gobierno, ONG, empresa, comunidad, otro
+- Información completa (industria, web, contacto)
+- Gestión de contactos asociados
+- Dirección estructurada (JSON)
+- Campos personalizados y tags
+- Estados: active, inactive, archived
 
-2. **Cambiar base de datos a MySQL/PostgreSQL**
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=crm_db
-DB_USERNAME=root
-DB_PASSWORD=
-```
+### Interaction
+Seguimiento de interacciones con:
+- **Tipos**: email, call, meeting, event, note
+- Información detallada (asunto, descripción, duración)
+- Outcomes: positive, neutral, negative
+- Próximas interacciones y recordatorios
+- Timeline histórico completo
+- Vinculación a contactos y organizaciones
 
-3. **Optimizar aplicación**
-```bash
-composer install --optimize-autoloader --no-dev
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-npm run build
-```
+### Segment
+Segmentación de audiencias:
+- Segmentación dinámica con reglas
+- Segmentación estática manual
+- Integración con campañas
+- Tipos: dynamic, static
 
-4. **Ejecutar migraciones en producción**
-```bash
-php artisan migrate --force
-```
+### Campaign
+Gestión de campañas:
+- Tipos: email, event, survey
+- Estados: draft, scheduled, active, completed, cancelled
+- Métricas de rendimiento
+- Vinculación a segmentos
 
 ## 🔐 Seguridad
 
-- ✅ Middleware de autenticación en todas las rutas protegidas
-- ✅ Validación de formularios
-- ✅ CSRF Protection
-- ✅ Password hashing (bcrypt)
-- ✅ SQL Injection protection (Eloquent)
-- ⚠️ 2FA disponible (configurar en settings)
+- **Autenticación**: Laravel Fortify con soporte completo
+- **Two-Factor Authentication (2FA)**: Disponible para usuarios
+- **Soft Deletes**: Habilitado en todos los modelos críticos
+- **Auditoría**: Tracking de created_by/updated_by
+- **Validación**: Componentes Livewire con validación en tiempo real
+- **Proteción CSRF**: Habilitada en todos los formularios
 
-## 📈 Roadmap
+## 🎨 UI/UX
 
-### Fase 1: MVP (✅ Completado)
-- [x] Base de datos
-- [x] Modelos
-- [x] Dashboard
-- [x] CRUD de contactos
-- [x] Sistema de interacciones
+- **Flux UI Components**: Sistema de componentes moderno y consistente
+- **Tailwind CSS**: Utilidad-first CSS framework
+- **Dark Mode**: Soporte completo con toggle
+- **Responsive**: Optimizado para móvil, tablet y desktop
+- **Accesibilidad**: Componentes accesibles y navegación por teclado
 
-### Fase 2: Escalamiento
-- [ ] Módulo de organizaciones completo
-- [ ] Importación/Exportación CSV
-- [ ] Reportes avanzados
-- [ ] Búsqueda global
+## 🔄 Desarrollo
 
-### Fase 3: Automatización
-- [ ] Motor de automatización
-- [ ] Workflows
-- [ ] Plantillas de email
-- [ ] Segmentos dinámicos
+### Comandos útiles
 
-### Fase 4: Campañas
-- [ ] Email marketing
-- [ ] Tracking de emails
-- [ ] Formularios
-- [ ] Landing pages
+```bash
+# Desarrollo con hot reload
+npm run dev
 
-### Fase 5: Multi-tenant
-- [ ] Sistema de tenants
-- [ ] Planes y suscripciones
-- [ ] Facturación
+# Build para producción
+npm run build
 
-## 🤝 Contribuir
+# Limpiar cache de Laravel
+php artisan optimize:clear
 
-Las contribuciones son bienvenidas! Por favor:
+# Ver logs en tiempo real
+php artisan pail
 
-1. Fork el proyecto
-2. Crea tu feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+# Ejecutar queue workers
+php artisan queue:work
 
-## 📝 Licencia
+# Crear nuevo componente Livewire
+php artisan make:livewire NombreComponente
+```
 
-MIT License - ver el archivo [LICENSE](LICENSE) para más detalles.
+### Variables de entorno importantes
 
-## 💬 Soporte
+```env
+APP_NAME="MS CRM"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
 
-Para preguntas o soporte:
-- Documentación: Ver archivos `CRM_*.md`
-- Issues: Abrir un issue en GitHub
-- Email: [tu-email@ejemplo.com]
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ms_crm
+DB_USERNAME=root
+DB_PASSWORD=
 
-## 👥 Autores
+MAIL_MAILER=smtp
+# ... configuración de email
+```
 
-- **Tu Nombre** - *Desarrollo inicial* - [GitHub](https://github.com/tu-usuario)
+## 🚦 Roadmap
 
-## 🙏 Agradecimientos
+Futuras mejoras planificadas:
 
-- Laravel Team
-- Livewire Team
-- Flux UI Team
-- Comunidad Open Source
+- [ ] API REST para integraciones externas
+- [ ] Exportación de reportes (PDF/Excel)
+- [ ] Sistema de notificaciones en tiempo real
+- [ ] Gestión de archivos y documentos
+- [ ] Dashboard personalizable por usuario
+- [ ] Integración con email (IMAP/SMTP)
+- [ ] Webhooks para eventos
+- [ ] Sistema de permisos y roles
+- [ ] Multi-tenancy
+- [ ] Módulo de reportes avanzados
+
+## 📈 Métricas del Dashboard
+
+El dashboard muestra:
+- **Total de Contactos**: Contador con tendencia
+- **Total de Organizaciones**: Contador con tendencia
+- **Interacciones del Mes**: Contador con tendencia
+- **Interacciones Recientes**: Lista de las últimas interacciones
+- **Próximas Interacciones**: Calendario de actividades agendadas
+
+## 🤝 Contribución
+
+Este es un proyecto privado. Para contribuir, contactar al equipo de desarrollo.
+
+## 📄 Licencia
+
+Este proyecto es software propietario.
+
+## 👥 Soporte
+
+Para soporte y consultas, contactar al equipo de desarrollo.
 
 ---
 
-**Desarrollado con ❤️ usando Laravel + Livewire + Flux UI**
-
-**Versión:** 1.0.0 MVP  
-**Última actualización:** 2026-01-06
+**Desarrollado con ❤️ usando Laravel + Livewire**
